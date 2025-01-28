@@ -35,7 +35,7 @@ impl Matrix{
     }
 
     pub fn multiply(first: &Matrix, second: &Matrix) -> Matrix{
-        if(first.cols != second.rows){
+        if first.cols != second.rows{
             panic!(
                 "Multiplication is impossible!"
             )
@@ -56,7 +56,7 @@ impl Matrix{
     }
 
     pub fn add(first: &Matrix, second: &Matrix) -> Matrix{
-        if(first.cols != second.cols || first.rows != second.rows){
+        if first.cols != second.cols || first.rows != second.rows{
             panic!("Addition is impossible!")
         }
         let mut res: Matrix = first.clone();
@@ -71,7 +71,7 @@ impl Matrix{
     }
 
     pub fn substract(first: &Matrix, second: &Matrix) -> Matrix{
-        if(first.cols != second.cols || first.rows != second.rows){
+        if first.cols != second.cols || first.rows != second.rows{
             panic!("Addition is impossible!")
         }
         let mut res: Matrix = first.clone();
@@ -86,7 +86,7 @@ impl Matrix{
     }
 
     pub fn dot_multiply(first: &Matrix, second: &Matrix) -> Matrix{
-        if(first.cols != second.cols || first.rows != second.rows){
+        if first.cols != second.cols || first.rows != second.rows {
             panic!("Dot multiplication is impossible!")
         }
         let mut res: Matrix = first.clone();
@@ -102,7 +102,7 @@ impl Matrix{
 
     pub fn from(data: Vec<Vec<f64>>) -> Matrix{
         let mut cols: usize = 0;
-        if data.len() > 0{
+        if !data.is_empty(){
             cols = data[0].len();
         }
         Matrix { rows: data.len(), cols: cols, data: data }
@@ -118,9 +118,7 @@ impl Matrix{
                 |row| 
                 row
                 .into_iter()
-                .map(|value| 
-                    function(value)
-                )
+                .map(function)
                 .collect()
             )
             .collect() 
@@ -140,7 +138,7 @@ impl Matrix{
         res
     }
 
-    pub fn print(&self) -> (){
+    pub fn print(&self){
         for i in &self.data{
             print!("[");
             for j in i{
@@ -149,7 +147,5 @@ impl Matrix{
             print!("],");
             println!("");
         }
-
-        ()
     }
 }
